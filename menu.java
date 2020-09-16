@@ -15,7 +15,7 @@ public class menu {
     System.out.println("5.chuong trinh nhap so nguyen N, kiem tra va xuat ket qua N la so am/duong/zero");
     System.out.println("6.chuong trinh nhap so tu nhien N,kiem tra va xuat ket qua N la so nguyen to hay khong");
     System.out.println("7.chuong trinh nhap so tu nhien,xuat ket qua:");
-    System.out.println("  -cac so tu nhien <=N va tong cua chung");
+    System.out.println("  -cac so tu nhien <= N va tong cua chung");
     System.out.println("  -cac so tu nhien chan <= N va tong cua chung");
     System.out.println("  -cac so tu nhien le <= N va tong cua chung");
     System.out.println("  -cac so tu nhien la so nguyen to <= N va tong cua chung");
@@ -84,20 +84,20 @@ public class menu {
     System.out.println("dien tich hinh tron la: " + (Math.pow(r, 2) * Math.PI));
   }
 
-  static float inputN() {
+  static int inputN() {
     System.out.println("nhap N: ");
     Scanner sc = new Scanner(System.in);
-    float n = sc.nextFloat();
+    int n = sc.nextInt();
     return n;
   }
 
   static void program4() {
-    float number = inputN();
+    int number = inputN();
     System.out.println((number % 2 == 0) ? (number + " la so chan") : (number + " la so le"));
   }
 
   static void program5() {
-    float number = inputN();
+    int number = inputN();
     if (number == 0) {
       System.out.println(number + " la zero");
     } else if (number < 0) {
@@ -109,7 +109,7 @@ public class menu {
 
   static boolean primaryNumber(float num) {
     double limit = Math.sqrt(num);
-    for (int i = 2; i < limit; i++) {
+    for (int i = 2; i <= limit; i++) {
       if (num % i == 0) {
         return false;
       }
@@ -118,8 +118,79 @@ public class menu {
   }
 
   static void program6() {
-    float number = inputN();
+    int number = inputN();
     System.out.println((primaryNumber(number)) ? (number + " la so nguyen to") : (number + " khong la so nguyen to"));
+  }
+
+  static void soTuNhienBeHonNvaTong(int number) {
+    int sum = 0;
+    System.out.print("cac so tu nhien be hon hoac bang " + number + ": ");
+    for (int i = 1; i <= number; i++) {
+      System.out.print("  " + i);
+      sum += i;
+    }
+    System.out.println("\ntong nhung so nho hon hoac bang " + number + " la: " + sum);
+  }
+
+  static void soTuNhienChanBeHonNvaTong(int number) {
+    int sum = 0;
+    System.out.print("cac so tu nhien chan be hon hoac bang " + number + ": ");
+    for (int i = 1; i <= number; i++) {
+      if (i % 2 == 0) {
+        System.out.print("  " + i);
+        sum += i;
+      }
+    }
+    System.out.println("\ntong nhung so chan nho hon hoac bang " + number + " la: " + sum);
+  }
+
+  static void soTuNhienLeBeHonNvaTong(int number) {
+    int sum = 0;
+    System.out.print("cac so tu nhien le be hon hoac bang " + number + ": ");
+    for (int i = 1; i <= number; i++) {
+      if (i % 2 != 0) {
+        System.out.print("  " + i);
+        sum += i;
+      }
+    }
+    System.out.println("\ntong nhung so le nho hon hoac bang " + number + " la: " + sum);
+  }
+
+  static void soNguyenToBeHonNvaTong(int number) {
+    int sum = 0;
+    System.out.print("cac so nguyen to be hon hoac bang " + number + ": ");
+    for (int i = 1; i <= number; i++) {
+      if (primaryNumber(i)) {
+        System.out.print("  " + i);
+        sum += i;
+      }
+    }
+    System.out.println("\ntong nhung so nguyen to nho hon hoac bang " + number + " la: " + sum);
+  }
+
+  static void NsonguyenToDauTien(int number) {
+    int count = 0;
+    int i = 1;
+    int sum = 0;
+    System.out.print(number + " so nguyen to dau tien la: ");
+    while (count < number) {
+      if (primaryNumber(i)) {
+        System.out.print("  " + i);
+        sum += i;
+        count++;
+      }
+      i++;
+    }
+    System.out.println("\ntong " + number + " so nguyen to la: " + sum);
+  }
+
+  static void program7() {
+    int number = inputN();
+    soTuNhienBeHonNvaTong(number);
+    soTuNhienChanBeHonNvaTong(number);
+    soTuNhienLeBeHonNvaTong(number);
+    soNguyenToBeHonNvaTong(number);
+    NsonguyenToDauTien(number);
   }
 
   static void option(int choice) {
@@ -141,6 +212,9 @@ public class menu {
         break;
       case 6:
         program6();
+        break;
+      case 7:
+        program7();
         break;
       default:
         break;
