@@ -15,19 +15,19 @@ public class menu {
     System.out.println("5.chuong trinh nhap so nguyen N, kiem tra va xuat ket qua N la so am/duong/zero");
     System.out.println("6.chuong trinh nhap so tu nhien N,kiem tra va xuat ket qua N la so nguyen to hay khong");
     System.out.println("7.chuong trinh nhap so tu nhien,xuat ket qua:");
-    System.out.println("  -cac so tu nhien <= N va tong cua chung");
-    System.out.println("  -cac so tu nhien chan <= N va tong cua chung");
-    System.out.println("  -cac so tu nhien le <= N va tong cua chung");
-    System.out.println("  -cac so tu nhien la so nguyen to <= N va tong cua chung");
-    System.out.println("  -N so nguyen to dau tien");
+    System.out.println("  a.cac so tu nhien <= N va tong cua chung");
+    System.out.println("  b.cac so tu nhien chan <= N va tong cua chung");
+    System.out.println("  c.cac so tu nhien le <= N va tong cua chung");
+    System.out.println("  d.cac so tu nhien la so nguyen to <= N va tong cua chung");
+    System.out.println("  e.N so nguyen to dau tien");
     System.out.println("8.chuong trinh nhap so tu nhien N, nhap N phan tu cua mang a,xuat ket qua");
-    System.out.println("  -cac phan tu cua mang a va tong cua chung");
-    System.out.println("  -cac phan tu chan cua mang a va tong cua chung");
-    System.out.println("  -cac phan tu le cua mang a va tong cua chung");
-    System.out.println("  -them mot phan tu moi vao mang");
-    System.out.println("  -xoa phan tu thu k cua mang");
+    System.out.println("  a.cac phan tu cua mang a va tong cua chung");
+    System.out.println("  b.cac phan tu chan cua mang a va tong cua chung");
+    System.out.println("  c.cac phan tu le cua mang a va tong cua chung");
+    System.out.println("  d.them mot phan tu moi vao mang");
+    System.out.println("  e.xoa phan tu thu k cua mang");
     System.out
-        .println("  -nhap 1 so x, kiem tra x co trong mang a hay khong, neu co thi tra ve vi tri cua x trong mang a");
+        .println("  g.nhap 1 so x, kiem tra x co trong mang a hay khong, neu co thi tra ve vi tri cua x trong mang a");
     System.out.println("9.chuong trinh nhap chuoi x va xuat ket qua");
     System.out.println("  -do dai cua s");
     System.out.println("  -xoa bo khoang trang thu cua s");
@@ -37,7 +37,7 @@ public class menu {
   }
 
   static int inputChoice() {
-    System.out.println("nhap lua chon cua ban hoac nhap 0 de thoai khoi chuong trinh:");
+    System.out.print("nhap lua chon cua ban: ");
     Scanner sc = new Scanner(System.in);
     String str = sc.next();
     str = str.toLowerCase();
@@ -46,7 +46,7 @@ public class menu {
   }
 
   static int inputNuberN() {
-    System.out.println("Nhap N:");
+    System.out.print("Nhap N: ");
     Scanner sc = new Scanner(System.in);
     String str = sc.next();
     str = str.toLowerCase();
@@ -184,13 +184,230 @@ public class menu {
     System.out.println("\ntong " + number + " so nguyen to la: " + sum);
   }
 
+  static void printOption7() {
+    System.out.println("7.chuong trinh nhap so tu nhien,xuat ket qua:");
+    System.out.println("  a.cac so tu nhien <= N va tong cua chung");
+    System.out.println("  b.cac so tu nhien chan <= N va tong cua chung");
+    System.out.println("  c.cac so tu nhien le <= N va tong cua chung");
+    System.out.println("  d.cac so tu nhien la so nguyen to <= N va tong cua chung");
+    System.out.println("  e.N so nguyen to dau tien");
+  }
+
+  static void optionProgram7() {
+
+    String choice;
+    int number;
+    while (true) {
+      System.out.println("nhap lua chon cua ban: ");
+      Scanner sc = new Scanner(System.in);
+      choice = sc.nextLine().toLowerCase();
+      if (choice.charAt(0) >= 97 && choice.charAt(0) <= 102 && choice.length() == 1) {
+        break;
+      }
+    }
+    switch (choice) {
+      case "a":
+        number = inputN();
+        soTuNhienBeHonNvaTong(number);
+        break;
+      case "b":
+        number = inputN();
+        soTuNhienChanBeHonNvaTong(number);
+        break;
+      case "c":
+        number = inputN();
+        soTuNhienLeBeHonNvaTong(number);
+        break;
+      case "d":
+        number = inputN();
+        soNguyenToBeHonNvaTong(number);
+        break;
+      case "e":
+        number = inputN();
+        NsonguyenToDauTien(number);
+        break;
+      default:
+        break;
+    }
+  }
+
   static void program7() {
-    int number = inputN();
-    soTuNhienBeHonNvaTong(number);
-    soTuNhienChanBeHonNvaTong(number);
-    soTuNhienLeBeHonNvaTong(number);
-    soNguyenToBeHonNvaTong(number);
-    NsonguyenToDauTien(number);
+    printOption7();
+    optionProgram7();
+  }
+
+  static void inputArr(int arr[], int n) {
+    Scanner sc = new Scanner(System.in);
+    for (int i = 0; i < n; i++) {
+      System.out.print("arr[" + i + "] = ");
+      arr[i] = sc.nextInt();
+    }
+  }
+
+  static void printArr(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+      System.out.print("  " + arr[i]);
+    }
+    System.out.println();
+  }
+
+  static void cacPhanTuArrVaTong(int arr[], int n) {
+    int sum = 0;
+    System.out.print("cac phan tu cua mang la: ");
+    for (int i = 0; i < n; i++) {
+      System.out.print("  " + arr[i]);
+      sum += arr[i];
+    }
+    System.out.println();
+    System.out.println("Tong cac phan tu trong mang la: " + sum);
+  }
+
+  static void cacPhanTuChanArrVaTong(int arr[], int n) {
+    int sum = 0;
+    System.out.print("cac phan tu chan cua mang la: ");
+    for (int i = 0; i < n; i++) {
+      if (arr[i] % 2 == 0 && arr[i] != 0) {
+        System.out.print("  " + arr[i]);
+        sum += arr[i];
+      }
+    }
+    System.out.println();
+    System.out.println("Tong cac phan tu chan trong mang la: " + sum);
+  }
+
+  static void cacPhanTuLeArrVaTong(int arr[], int n) {
+    int sum = 0;
+    System.out.print("cac phan tu le cua mang la: ");
+    for (int i = 0; i < n; i++) {
+      if (arr[i] % 2 != 0 && arr[i] != 0) {
+        System.out.print("  " + arr[i]);
+        sum += arr[i];
+      }
+    }
+    System.out.println();
+    System.out.println("Tong cac phan tu le trong mang la: " + sum);
+  }
+
+  static int inputK() {
+    System.out.println("nhap vi tri k: ");
+    Scanner sc = new Scanner(System.in);
+    int k = sc.nextInt();
+    return k;
+  }
+
+  static void themPhanTuVaoMan(int arr[], int n, int k, int num) {
+    int[] arr2 = new int[n + 1];
+    if (k < 0) {
+      k = 0;
+    } else if (k > n) {
+      k = n;
+    }
+    for (int i = 0, j = 0; j < n + 1; i++, j++) {
+      if (j == k) {
+        i--;
+        arr2[j] = num;
+      } else {
+        arr2[j] = arr[i];
+      }
+    }
+    n++;
+    System.out.print("mang sau khi them la:");
+    printArr(arr2, n);
+  }
+
+  static void xoaPhanTuThuK(int arr[], int n, int k) {
+    if (k < 0) {
+      k = 0;
+    } else if (k > n) {
+      k = n;
+    }
+
+    for (int i = k; i < n - 1; i++) {
+      arr[i] = arr[i + 1];
+    }
+    n--;
+    System.out.print("mang sau khi xoa la:");
+    printArr(arr, n);
+  }
+
+  static void printOption8() {
+    System.out.println("8.chuong trinh nhap so tu nhien N, nhap N phan tu cua mang a,xuat ket qua");
+    System.out.println("  a.cac phan tu cua mang a va tong cua chung");
+    System.out.println("  b.cac phan tu chan cua mang a va tong cua chung");
+    System.out.println("  c.cac phan tu le cua mang a va tong cua chung");
+    System.out.println("  d.them mot phan tu moi vao mang");
+    System.out.println("  e.xoa phan tu thu k cua mang");
+  }
+
+  static void optionProgram8() {
+    int n;
+    Scanner sc = new Scanner(System.in);
+
+    String choice;
+    while (true) {
+      System.out.println("nhap lua chon cua ban: ");
+      choice = sc.nextLine().toLowerCase();
+      if (choice.charAt(0) >= 97 && choice.charAt(0) <= 102 && choice.length() == 1) {
+        break;
+      }
+    }
+
+    switch (choice) {
+      case "a":
+        n = inputN();
+        int[] arr = new int[n];
+        inputArr(arr, n);
+        cacPhanTuArrVaTong(arr, n);
+        break;
+      case "b":
+        n = inputN();
+        arr = new int[n];
+        inputArr(arr, n);
+        cacPhanTuChanArrVaTong(arr, n);
+        break;
+      case "c":
+        n = inputN();
+        arr = new int[n];
+        inputArr(arr, n);
+        cacPhanTuLeArrVaTong(arr, n);
+        break;
+      case "d":
+        n = inputN();
+        arr = new int[n];
+        inputArr(arr, n);
+        int k = inputK();
+        System.out.println("nhap phan tu ban muon them: ");
+        int num = sc.nextInt();
+        themPhanTuVaoMan(arr, n, k, num);
+        break;
+      case "e":
+        n = inputN();
+        arr = new int[n];
+        inputArr(arr, n);
+        k = inputK();
+        xoaPhanTuThuK(arr, n, k);
+        break;
+      default:
+        break;
+    }
+  }
+
+  static void program8() {
+    printOption8();
+    optionProgram8();
+  }
+
+  static void printProgram9() {
+    System.out.println("9.chuong trinh nhap chuoi x va xuat ket qua");
+    System.out.println("  a.do dai cua s");
+    System.out.println("  b.xoa bo khoang trang thu cua s");
+    System.out.println("  c.dem so tu cua s va xuat moi tu nam tren 1 dong");
+    System.out.println("  d.nhap so tu nhien k, xuat k ky tu ben trai cua s, k ky tu ben phai cua s");
+    System.out.println("  e.nhap so tu nhien k,n xuat n ky tu cua s ke tu vi tri k");
+  }
+
+  static void program9() {
+
   }
 
   static void option(int choice) {
@@ -216,6 +433,11 @@ public class menu {
       case 7:
         program7();
         break;
+      case 8:
+        program8();
+        break;
+      case 9:
+        break;
       default:
         break;
     }
@@ -223,16 +445,27 @@ public class menu {
 
   public static void main(String[] args) {
     printMenu();
-    int result = inputChoice();
-    option(result);
+    int choice;
     while (true) {
-      System.out.println("ban co muon tiep tuc chuong trinh(y/n)?");
-      Scanner sc = new Scanner(System.in);
-      String answer = sc.nextLine();
-      if (true) {
+      choice = inputChoice();
+      if (choice >= 1 && choice <= 9) {
         break;
       }
-      printMenu();
+    }
+    option(choice);
+
+    while (true) {
+      System.out.println("ban co muon tiep tuc chuong trinh(y/n) ?");
+      Scanner sc = new Scanner(System.in);
+      String answer = sc.nextLine().toLowerCase();
+      if (answer.charAt(0) == 'n') {
+        break;
+      }
+      if (answer.charAt(0) == 'y') {
+        printMenu();
+        choice = inputChoice();
+        option(choice);
+      }
     }
   }
 }
