@@ -444,7 +444,7 @@ public class menu {
   static void demSoTucuaSVaXuatMoiTuTrenMoiDong(String str) {
     int length = str.length();
     System.out.println("so tu cua chuoi s la: " + demSoTu(str));
-    System.out.println("chuoi sau khi xoa la: ");
+    System.out.println("chuoi xuat moi tu tren mot dong la: ");
     if (str.charAt(0) != ' ') {
       System.out.print(str.charAt(0));
     }
@@ -460,10 +460,48 @@ public class menu {
     System.out.print('\n');
   }
 
+  static void xuatKyTuBenTraiVaPhaiChuoiS(String str, int k) {
+    int length = str.length();
+    if (k > length) {
+      k = length;
+    } else if (k < 0) {
+      k = 0;
+    }
+    System.out.println(k + " ky tu ben trai chuoi s la: ");
+    for (int i = 0; i < k; i++) {
+      System.out.print(str.charAt(i));
+    }
+    System.out.println("\n" + k + " ky tu ben phai chuoi s la: ");
+    for (int i = length - k; i < length; i++) {
+      System.out.print(str.charAt(i));
+    }
+    System.out.print("\n");
+  }
+
+  static void xuatNKyTuViTriKCuaChuoiS(String str, int k, int n) {
+    int length = str.length();
+    if (k > length) {
+      k = length;
+    } else if (k < 0) {
+      k = 0;
+    }
+    System.out.println(n + " ky tu cua s ke tu vi tri k la: ");
+    for (int i = k, j = 0; i < length; i++) {
+      if (j >= n) {
+        break;
+      } else {
+        j++;
+        System.out.print(str.charAt(i));
+      }
+    }
+    System.out.println();
+  }
+
   static void option9() {
     Scanner sc = new Scanner(System.in);
     String str;
     String choice;
+    int k;
     while (true) {
       System.out.println("nhap lua chon cua ban: ");
       choice = sc.next().toLowerCase();
@@ -483,6 +521,20 @@ public class menu {
       case "c":
         str = inputS();
         demSoTucuaSVaXuatMoiTuTrenMoiDong(str);
+      case "d":
+        str = inputS();
+        System.out.println("nhap k: ");
+        k = sc.nextInt();
+        xuatKyTuBenTraiVaPhaiChuoiS(str, k);
+        break;
+      case "e":
+        str = inputS();
+        System.out.println("nhap k: ");
+        k = sc.nextInt();
+        System.out.println("nhap n: ");
+        int n = sc.nextInt();
+        xuatNKyTuViTriKCuaChuoiS(str, k, n);
+        break;
       default:
         break;
     }
