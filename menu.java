@@ -29,11 +29,11 @@ public class menu {
     System.out
         .println("  g.nhap 1 so x, kiem tra x co trong mang a hay khong, neu co thi tra ve vi tri cua x trong mang a");
     System.out.println("9.chuong trinh nhap chuoi x va xuat ket qua");
-    System.out.println("  -do dai cua s");
-    System.out.println("  -xoa bo khoang trang thu cua s");
-    System.out.println("  -dem so tu cua s va xuat moi tu nam tren 1 dong");
-    System.out.println("  -nhap so tu nhien k, xuat k ky tu ben trai cua s, k ky tu ben phai cua s");
-    System.out.println("  -nhap so tu nhien k,n xuat n ky tu cua s ke tu vi tri k");
+    System.out.println("  a.do dai cua s");
+    System.out.println("  b.xoa bo khoang trang thu cua s");
+    System.out.println("  c.dem so tu cua s va xuat moi tu nam tren 1 dong");
+    System.out.println("  d.nhap so tu nhien k, xuat k ky tu ben trai cua s, k ky tu ben phai cua s");
+    System.out.println("  e.nhap so tu nhien k,n xuat n ky tu cua s ke tu vi tri k");
   }
 
   static int inputChoice() {
@@ -346,7 +346,7 @@ public class menu {
     String choice;
     while (true) {
       System.out.println("nhap lua chon cua ban: ");
-      choice = sc.nextLine().toLowerCase();
+      choice = sc.next().toLowerCase();
       if (choice.charAt(0) >= 97 && choice.charAt(0) <= 102 && choice.length() == 1) {
         break;
       }
@@ -397,17 +397,101 @@ public class menu {
     optionProgram8();
   }
 
+  static String inputS() {
+
+    Scanner sc = new Scanner(System.in);
+    System.out.println("nhap mang s: ");
+    String str = sc.nextLine();
+    return str;
+  }
+
   static void printProgram9() {
     System.out.println("9.chuong trinh nhap chuoi x va xuat ket qua");
     System.out.println("  a.do dai cua s");
-    System.out.println("  b.xoa bo khoang trang thu cua s");
+    System.out.println("  b.xoa bo khoang trang thua cua s");
     System.out.println("  c.dem so tu cua s va xuat moi tu nam tren 1 dong");
     System.out.println("  d.nhap so tu nhien k, xuat k ky tu ben trai cua s, k ky tu ben phai cua s");
     System.out.println("  e.nhap so tu nhien k,n xuat n ky tu cua s ke tu vi tri k");
   }
 
-  static void program9() {
+  static void xoaKhoangTrangThuaChuoi(String str) {
+    int length = str.length();
+    System.out.println("chuoi sau khi xoa la: ");
+    if (str.charAt(0) != ' ') {
+      System.out.print(str.charAt(0));
+    }
+    for (int i = 1; i < length; i++) {
+      if (str.charAt(i - 1) == ' ' && str.charAt(i) == ' ') {
+        continue;
+      } else {
+        System.out.print(str.charAt(i));
+      }
+    }
+    System.out.print('\n');
+  }
 
+  static int demSoTu(String str) {
+    int count = 0;
+    int length = str.length();
+    for (int i = 0; i < length; i++) {
+      if (str.charAt(i) != ' ') {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  static void demSoTucuaSVaXuatMoiTuTrenMoiDong(String str) {
+    int length = str.length();
+    System.out.println("so tu cua chuoi s la: " + demSoTu(str));
+    System.out.println("chuoi sau khi xoa la: ");
+    if (str.charAt(0) != ' ') {
+      System.out.print(str.charAt(0));
+    }
+    for (int i = 1; i < length; i++) {
+      if (str.charAt(i - 1) == ' ' && str.charAt(i) == ' ') {
+        continue;
+      } else if (str.charAt(i - 1) != ' ' && str.charAt(i) == ' ') {
+        System.out.print("\n");
+      } else {
+        System.out.print(str.charAt(i));
+      }
+    }
+    System.out.print('\n');
+  }
+
+  static void option9() {
+    Scanner sc = new Scanner(System.in);
+    String str;
+    String choice;
+    while (true) {
+      System.out.println("nhap lua chon cua ban: ");
+      choice = sc.next().toLowerCase();
+      if (choice.charAt(0) >= 97 && choice.charAt(0) <= 102 && choice.length() == 1) {
+        break;
+      }
+    }
+
+    switch (choice) {
+      case "a":
+        str = inputS();
+        System.out.println("do dai cua chuoi s la: " + str.length());
+        break;
+      case "b":
+        str = inputS();
+        xoaKhoangTrangThuaChuoi(str);
+      case "c":
+        str = inputS();
+        demSoTucuaSVaXuatMoiTuTrenMoiDong(str);
+      default:
+        break;
+    }
+
+  }
+
+  static void program9() {
+    printProgram9();
+    option9();
   }
 
   static void option(int choice) {
@@ -437,6 +521,7 @@ public class menu {
         program8();
         break;
       case 9:
+        program9();
         break;
       default:
         break;
